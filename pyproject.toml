@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sbp-client"
+name = "sbp4ai-client"
 version = "0.4.0"
 description = "SBP (Session Bridge Protocol) E2EE crypto core: X25519 crypto_box + Ed25519, opaque-tag routing, for clients and devices talking to an untrusted sbp-dispatcher."
 readme = "README.md"
@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/sbp4ai/sbp-spec"
+Homepage = "https://github.com/sbp4ai/sbp-client"
 Specification = "https://github.com/sbp4ai/sbp-spec/blob/main/spec/SBP-0.4-e2ee.md"
 
 [tool.setuptools]

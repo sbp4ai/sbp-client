@@ -11,7 +11,7 @@ Ed25519 signature over `tag || eph || cipher`. Routing is blinded with
 ## Install
 
 ```bash
-pip install sbp-client
+pip install sbp4ai-client
 ```
 
 ## Quick start
