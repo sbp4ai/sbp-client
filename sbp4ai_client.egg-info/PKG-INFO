@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: sbp4ai-client
-Version: 0.4.0
+Version: 0.5.7
 Summary: SBP (Session Bridge Protocol) E2EE crypto core: X25519 crypto_box + Ed25519, opaque-tag routing, for clients and devices talking to an untrusted sbp-dispatcher.
 Author: slamKun
 License: MIT
@@ -17,12 +17,12 @@ Description-Content-Type: text/markdown
 Requires-Dist: pynacl>=1.5
 Requires-Dist: argon2-cffi>=21.0
 
-# sbp-client
+# sbp4ai-client
 
 SBP (Session Bridge Protocol) **end-to-end encryption core**. Implements the wire
 format from [`sbp-spec/spec/SBP-0.4-e2ee.md`](https://github.com/sbp4ai/sbp-spec/blob/main/spec/SBP-0.4-e2ee.md).
 
-The relay (`sbp-dispatcher`) never holds a secret: confidentiality comes from
+The relay (`sbp4ai-dispatcher`) never holds a secret: confidentiality comes from
 `crypto_box` sealing to the *pinned* recipient box public key, and integrity from an
 Ed25519 signature over `tag || eph || cipher`. Routing is blinded with
 `HMAC(rk, scope)`, so the relay cannot even tell which session a frame belongs to.
@@ -32,6 +32,21 @@ Ed25519 signature over `tag || eph || cipher`. Routing is blinded with
 ```bash
 pip install sbp4ai-client
 ```
+
+## Standard usage (3 steps)
+
+```bash
+pip install sbp4ai-agents                      # on the controlled machine
+sbp-agents --relay wss://relay.example.com/ws-e2ee
+cat .copy2client
+```
+
+**`cat .copy2client` → copy the whole block → paste it into the console / mini-program
+「粘贴导入」(paste-import) box — it imports both clients at once
+(`cli-web` web console + `cli-minis` WeChat mini program).**
+
+The paste string carries the client's own `box_sk` / `sign_sk` plus the device's pinned
+public keys and `rk`, i.e. exactly the material this package's `E2EELink` needs.
 
 ## Quick start
 
@@ -82,9 +97,9 @@ public-key directory and routes by `tag` — it can do neither without `rk` / `b
 - `sbp_client/crypto.py` — `KeyPair`, `KeyRing`, `derive_rk`, `compute_tag`,
   `wrap`/`unwrap`, `sign_challenge`/`verify_challenge`, `verify_sig`.
 - `sbp_client/transport.py` — `E2EELink` / `Scope`: transport-agnostic envelope
-  wrap/unwrap + subscription control, shared by `sbp-agents` and client apps.
+  wrap/unwrap + subscription control, shared by `sbp4ai-agents` and client apps.
 
 ## Related
 
-- `sbp-dispatcher` — the relay (public-key directory + opaque-tag pub/sub).
-- `sbp-agents` — the device/panel that reports local tmux / CLI sessions.
+- [`sbp4ai-dispatcher`](https://pypi.org/project/sbp4ai-dispatcher/) — the relay (public-key directory + opaque-tag pub/sub).
+- [`sbp4ai-agents`](https://pypi.org/project/sbp4ai-agents/) — the device/panel that reports local tmux / CLI sessions.

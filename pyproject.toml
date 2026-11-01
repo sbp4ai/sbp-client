@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sbp4ai-client"
-version = "0.4.0"
+version = "0.5.7"
 description = "SBP (Session Bridge Protocol) E2EE crypto core: X25519 crypto_box + Ed25519, opaque-tag routing, for clients and devices talking to an untrusted sbp-dispatcher."
 readme = "README.md"
 requires-python = ">=3.9"
