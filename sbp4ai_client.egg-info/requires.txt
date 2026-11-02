@@ -1,2 +1,0 @@
-pynacl>=1.5
-argon2-cffi>=21.0
